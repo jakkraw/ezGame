@@ -57,7 +57,7 @@ struct Stage2 : public Stage {
 			ez.play(Music("music.mp3"));
 
 
-		auto text = Text("ezGame, Stage 2 , press \"1\" to go back", Position(0, 0), Size(600, 30), BLACK);
+		auto text = Text("ezGame, Stage 2 , press \"1\" to go back.", Position(0, 0), Size(600, 30), BLACK);
 		ez.draw(Text("ezGame, Stage 2 , press \"1\" to go back", Position(0, 0), Size(600, 30), BLACK));
 
 		ez.draw(Text("Stage 2", ez.cursor(), Size(600, 30), BLACK));	
@@ -88,10 +88,6 @@ struct Test : public Game {
 	// Inherited via ez
 	std::unique_ptr<Stage> start() override {
 		return std::make_unique<Stage1>();
-	}
-
-	~Test() {
-		int i = 0;
 	}
 
 };

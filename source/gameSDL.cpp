@@ -3,13 +3,17 @@
 
 
 
-GameSDL::GameSDL(Game*&& game, SDLData & gameData) : 
-	WindowSDL(gameData), 
-	game(game), 
-	stage(game->start().release(), [&ez = *this](Stage* stage){stage->cleanup(ez); delete stage;  }) 
+GameSDL::GameSDL(std::unique_ptr<Game> game) : WindowSDL()
 {
-	this->game->setup(*this);
-	this->stage->setup(*this);
+	game->setup(*this);
+	stage = StagePtr(game->start().release(), [&ez = *this](Stage* stage){ stage->cleanup(ez); delete stage; });
+	stage->setup(*this);
+}
+
+void GameSDL::run()
+{
+	while (isRunning())
+		update();
 }
 
 Seconds GameSDL::delta() const

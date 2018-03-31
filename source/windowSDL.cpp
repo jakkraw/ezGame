@@ -17,17 +17,13 @@ static void reset(std::vector<KeyState>& buttons) {
 	}
 }
 
-void WindowSDL::setDraw(const Color & color) {
-	SDL_SetRenderDrawColor(&sdlData.renderer, color.red, color.green, color.blue, Uint8(255 * color.alpha));
+void WindowSDL::setDraw(const Color & c) {
+	SDL_SetRenderDrawColor(sdl.renderer.get(), c.red, c.green, c.blue, Uint8(255 * c.alpha));
 }
-
-#define KeyboardKeysMaxSize 300
-WindowSDL::WindowSDL(SDLData& sdlData) :
-	sdlData(sdlData), loaders(sdlData.renderer), keyboard(KeyboardKeysMaxSize) {}
 
 void WindowSDL::update() {
 	drawAndClearRenderer();
-	reset(keyboard);
+	reset(keyboard.keys);
 	reset(mouse.buttons);
 
 	SDL_Event event;
@@ -63,9 +59,9 @@ void WindowSDL::update() {
 }
 
 void WindowSDL::drawAndClearRenderer() {
-	SDL_RenderPresent(&sdlData.renderer);
+	SDL_RenderPresent(sdl.renderer.get());
 	setDraw(backgroundColor);
-	SDL_RenderClear(&sdlData.renderer);
+	SDL_RenderClear(sdl.renderer.get());
 }
 
 void WindowSDL::setPointer(Position & p) {
@@ -73,11 +69,11 @@ void WindowSDL::setPointer(Position & p) {
 }
 
  void WindowSDL::keyUp(Keyboard::Key k) {
-	::keyUp(keyboard[(int)k]);
+	::keyUp(keyboard.keys[(int)k]);
 }
 
  void WindowSDL::keyDown(Keyboard::Key k) {
-	::keyDown(keyboard[(int)k]);
+	::keyDown(keyboard.keys[(int)k]);
 }
 
  void WindowSDL::keyUp(Mouse::Key m) {
@@ -98,26 +94,26 @@ void WindowSDL::setPointer(Position & p) {
 {
 	setDraw(r.color);
 	SDL_Rect rect{ r.topLeft.x, r.topLeft.y, r.size.width, r.size.height };
-	r.type == ShapeType::Filled ? SDL_RenderFillRect(&sdlData.renderer, &rect) : SDL_RenderDrawRect(&sdlData.renderer, &rect);
+	r.type == ShapeType::Filled ? SDL_RenderFillRect(sdl.renderer.get(), &rect) : SDL_RenderDrawRect(sdl.renderer.get(), &rect);
 }
 
  void WindowSDL::draw(const Line & l)
 {
 	setDraw(l.color);
-	SDL_RenderDrawLine(&sdlData.renderer, l.begin.x, l.begin.y, l.end.x, l.end.y);
+	SDL_RenderDrawLine(sdl.renderer.get(), l.begin.x, l.begin.y, l.end.x, l.end.y);
 }
 
  void WindowSDL::draw(const Point & p)
 {
 	setDraw(p.color);
-	SDL_RenderDrawPoint(&sdlData.renderer, p.x, p.y);
+	SDL_RenderDrawPoint(sdl.renderer.get(), p.x, p.y);
 }
 
 void WindowSDL::draw(const Image & t)
 {
 	SDL_Rect destination{ t.topLeft.x, t.topLeft.y, t.size.width, t.size.height };
 
-	SDL_RenderCopyEx(&sdlData.renderer, loaders.texture[t.cPath()].data, NULL,
+	SDL_RenderCopyEx(sdl.renderer.get(), sdl.loaders->texture[t.cPath()].data, NULL,
 		t.size == DEFAULT_SIZE ? nullptr : &destination,
 		t.angle, nullptr, SDL_RendererFlip::SDL_FLIP_NONE);
 }
@@ -129,7 +125,7 @@ const KeyState WindowSDL::button(Mouse::Key button) const
 
 const KeyState WindowSDL::button(Keyboard::Key button) const
 {
-	return keyboard[(int)button];
+	return keyboard.keys[(int)button];
 }
 
 const Mouse::Position WindowSDL::cursor() const
@@ -139,14 +135,14 @@ const Mouse::Position WindowSDL::cursor() const
 
 void WindowSDL::play(const Music& music)
 {
-	Mix_PlayMusic(loaders.music[music.cPath()].data, music.loopTimes == LoopTimes::Infinite ? -1 : 0);
+	Mix_PlayMusic(sdl.loaders->music[music.cPath()].data, music.loopTimes == LoopTimes::Infinite ? -1 : 0);
 }
 
 void WindowSDL::play(const Effect& effect)
 {
 	static short channel = 0;
 	channel = channel++ % 16;
-	Mix_PlayChannel(channel, loaders.chunk[effect.cPath()].data, effect.loopTimes == LoopTimes::Infinite ? -1 : 0);
+	Mix_PlayChannel(channel, sdl.loaders->chunk[effect.cPath()].data, effect.loopTimes == LoopTimes::Infinite ? -1 : 0);
 }
 
 void WindowSDL::stopMusic()
@@ -178,8 +174,8 @@ void WindowSDL::draw(const Text& text)
 	//quality
 	auto co = text.color;
 	auto c = SDL_Color{ co.red, co.green, co.blue , Uint8(255 * co.alpha) };
-	auto textSurface = TTF_RenderText_Solid(loaders.text.font, text.cText(), c);
-	auto mTexture = SDL_CreateTextureFromSurface(&sdlData.renderer, textSurface);
+	auto textSurface = TTF_RenderText_Solid(sdl.loaders->text.font, text.cText(), c);
+	auto mTexture = SDL_CreateTextureFromSurface(sdl.renderer.get(), textSurface);
 	SDL_FreeSurface(textSurface);
 
 	int w, h;
@@ -192,14 +188,14 @@ void WindowSDL::draw(const Text& text)
 	}
 
 	auto rect = SDL_Rect{ text.topLeft.x ,text.topLeft.y , w, h };
-	SDL_RenderCopyEx(&sdlData.renderer, mTexture, nullptr, &rect, 0, nullptr, SDL_RendererFlip::SDL_FLIP_NONE);
+	SDL_RenderCopyEx(sdl.renderer.get(), mTexture, nullptr, &rect, 0, nullptr, SDL_RendererFlip::SDL_FLIP_NONE);
 	SDL_DestroyTexture(mTexture);
 }
 
 const Resolution WindowSDL::resolution() const
 {
 	int w, h;
-	SDL_RenderGetLogicalSize(&sdlData.renderer, &w, &h);
+	SDL_RenderGetLogicalSize(sdl.renderer.get(), &w, &h);
 	return{ w,h };
 }
 
@@ -210,7 +206,7 @@ Settings & WindowSDL::settings() const
 
 void WindowSDL::set(Title title)
 {
-	SDL_SetWindowTitle(&sdlData.window, title);
+	SDL_SetWindowTitle(sdl.window.get(), title);
 }
 
 void WindowSDL::set(Background bg)
@@ -259,15 +255,15 @@ void WindowSDL::set(CursorVisibility cv)
 void WindowSDL::set(Window::Type wt)
 {
 	switch (wt) {
-	case Window::Type::Fullscreen: SDL_SetWindowFullscreen(&sdlData.window, SDL_WINDOW_FULLSCREEN); break;
-	case Window::Type::Windowed: SDL_SetWindowFullscreen(&sdlData.window,SDL_WINDOW_SHOWN); break;
+	case Window::Type::Fullscreen: SDL_SetWindowFullscreen(sdl.window.get(), SDL_WINDOW_FULLSCREEN); break;
+	case Window::Type::Windowed: SDL_SetWindowFullscreen(sdl.window.get(),SDL_WINDOW_SHOWN); break;
 	}
 }
 
 void WindowSDL::set(Resolution resolution)
 {
-	SDL_SetWindowSize(&sdlData.window, resolution.width, resolution.height);
-	SDL_RenderSetLogicalSize(&sdlData.renderer, resolution.width, resolution.height);
+	SDL_SetWindowSize(sdl.window.get(), resolution.width, resolution.height);
+	SDL_RenderSetLogicalSize(sdl.renderer.get(), resolution.width, resolution.height);
 }
 
 const CursorVisibility WindowSDL::cursorVisibility() const
@@ -278,9 +274,9 @@ const CursorVisibility WindowSDL::cursorVisibility() const
 const Window::Type WindowSDL::windowType() const
 {
 	//SDL_DisplayMode dm;
-	//SDL_GetWindowDisplayMode(&sdlData.window, &dm);
-	SDL_GetWindowFlags(&sdlData.window);
-	return SDL_GetWindowFlags(&sdlData.window) & SDL_WINDOW_FULLSCREEN ? Window::Type::Fullscreen : Window::Type::Windowed;
+	//SDL_GetWindowDisplayMode(sdlData.window.get(), &dm);
+	SDL_GetWindowFlags(sdl.window.get());
+	return SDL_GetWindowFlags(sdl.window.get()) & SDL_WINDOW_FULLSCREEN ? Window::Type::Fullscreen : Window::Type::Windowed;
 
 }
 
@@ -291,5 +287,5 @@ const Background WindowSDL::background() const
 
 const Title WindowSDL::title() const
 {
-	return SDL_GetWindowTitle(&sdlData.window);
+	return SDL_GetWindowTitle(sdl.window.get());
 }
