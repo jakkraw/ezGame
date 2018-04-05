@@ -1,7 +1,7 @@
 #pragma once
 #include "common.h"
 #include "info.h"
-#include "colors.h"
+#include "color.h"
 
 namespace ezGame {
 
@@ -62,5 +62,6 @@ namespace ezGame {
 		virtual void draw(const Text&) = 0;
 
 	};
+
 
 }

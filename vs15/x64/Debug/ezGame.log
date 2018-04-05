@@ -1,9 +1,4 @@
-﻿  windowSDL.cpp
-c:\kuba\programming\ezgame\source\windowsdl.cpp(281): warning C4101: 'dm': unreferenced local variable
-  gameSDL.cpp
-  extern.cpp
-  Generating Code...
-     Creating library C:\kuba\programming\ezGame\vs15\x64\Debug\ezGame.lib and object C:\kuba\programming\ezGame\vs15\x64\Debug\ezGame.exp
+﻿  extern.cpp
   ezGame.vcxproj -> C:\kuba\programming\ezGame\vs15\x64\Debug\ezGame.dll
   ezGame.vcxproj -> C:\kuba\programming\ezGame\vs15\x64\Debug\ezGame.pdb (Partial PDB)
   C:\kuba\programming\ezGame\vs15\x64\Debug\ezGame.lib
@@ -12,9 +7,10 @@ c:\kuba\programming\ezgame\source\windowsdl.cpp(281): warning C4101: 'dm': unref
   1 File(s) copied
   C:\kuba\programming\ezGame\vs15\..\source\interface\audio.h
   C:\kuba\programming\ezGame\vs15\..\source\interface\color.h
-  C:\kuba\programming\ezGame\vs15\..\source\interface\colors.h
   C:\kuba\programming\ezGame\vs15\..\source\interface\common.h
+  C:\kuba\programming\ezGame\vs15\..\source\interface\draw.cpp
   C:\kuba\programming\ezGame\vs15\..\source\interface\draw.h
+  C:\kuba\programming\ezGame\vs15\..\source\interface\drawFragment.h
   C:\kuba\programming\ezGame\vs15\..\source\interface\extern.h
   C:\kuba\programming\ezGame\vs15\..\source\interface\ez.h
   C:\kuba\programming\ezGame\vs15\..\source\interface\ezGame.h
@@ -25,7 +21,7 @@ c:\kuba\programming\ezgame\source\windowsdl.cpp(281): warning C4101: 'dm': unref
   C:\kuba\programming\ezGame\vs15\..\source\interface\settings.h
   C:\kuba\programming\ezGame\vs15\..\source\interface\stage.h
   C:\kuba\programming\ezGame\vs15\..\source\interface\window.h
-  15 File(s) copied
+  16 File(s) copied
   C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\ezGame.dll
   C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libFLAC-8.dll
   C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libfreetype-6.dll

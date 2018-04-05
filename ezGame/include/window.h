@@ -6,7 +6,7 @@
 
 namespace ezGame {
 	struct Settings;
-	typedef Color Background;
+	using Background = Color;
 	
 
 	enum class CursorVisibility {

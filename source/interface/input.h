@@ -14,7 +14,7 @@ namespace ezGame {
 			LEFT = 1, MIDDLE, RIGHT
 		};
 
-		typedef Position Position;
+		using Position = Position;
 	};
 
 	class Keyboard

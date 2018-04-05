@@ -16,9 +16,6 @@
     <ClInclude Include="..\source\interface\color.h">
       <Filter>interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\interface\colors.h">
-      <Filter>interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\interface\common.h">
       <Filter>interface</Filter>
     </ClInclude>
@@ -50,6 +47,9 @@
       <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="..\source\interface\resolutionInfo.h">
+      <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\interface\drawFragment.h">
       <Filter>interface</Filter>
     </ClInclude>
   </ItemGroup>

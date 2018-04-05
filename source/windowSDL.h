@@ -11,12 +11,14 @@ using namespace ezGame;
 
 struct MouseData
 {
-	std::vector<KeyState> buttons = std::vector<KeyState>(10);
+	const size_t mouseKeysNumber = 10;
+	std::vector<KeyState> buttons = std::vector<KeyState>(mouseKeysNumber);
 	Position pointer = { -1, -1 };
 };
 
 struct KeyboardData {
-	std::vector<KeyState> keys = std::vector<KeyState>(300);
+	const size_t keyboardKeysNumber = 300;
+	std::vector<KeyState> keys = std::vector<KeyState>(keyboardKeysNumber);
 };
 
 struct Loaders {
@@ -28,15 +30,21 @@ struct Loaders {
 };
 
 struct SDL {
-	typedef std::unique_ptr<SDL_Window, void(*)(SDL_Window*)> Window;
-	typedef std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> Renderer;
-	typedef std::unique_ptr<Loaders> Loaders;
-
+	using Window = std::unique_ptr<SDL_Window, void(*)(SDL_Window*)>;
 	Window window = { nullptr, SDL_DestroyWindow };
+
+	using Renderer = std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)>;
 	Renderer renderer = { nullptr, SDL_DestroyRenderer };
+
+	using Loaders = std::unique_ptr<Loaders>;
 	Loaders loaders = { nullptr };
 
-	void init(Title title, Resolution res, Size size) {
+	SDL() {
+		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
+		Title title("ezGame");
+		Resolution res(640, 480);
+		Size size(res);
+		
 		window.reset(SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.width, size.height, NULL));
 		renderer.reset(SDL_CreateRenderer(window.get(), -1, SDL_RendererFlags::SDL_RENDERER_ACCELERATED | SDL_RendererFlags::SDL_RENDERER_TARGETTEXTURE));
 		loaders.reset(new ::Loaders(*renderer));
@@ -51,33 +59,11 @@ struct SDL {
 		SDL_SetWindowGrab(window.get(), SDL_TRUE);
 		SDL_WarpMouseInWindow(window.get(), res.width / 2, res.height / 2);
 		//SDL_ShowCursor(0);
-
 	}
-
-
-	SDL() {
-		SDL_Init(SDL_INIT_VIDEO);
-		IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_JPG);
-		Mix_Init(MIX_INIT_MP3 | MIX_INIT_FLAC | MIX_INIT_OGG);
-		TTF_Init();
-		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
-
-		init("ezGame", { 640,480 }, { 640,480 });
-	}
-
 
 	~SDL() {
-		loaders.reset();
-		renderer.reset();
-		window.reset();
-		
-		TTF_Quit();
 		Mix_CloseAudio();
-		Mix_Quit();
-		IMG_Quit();
-		SDL_Quit();
 	}
-
 };
 
 

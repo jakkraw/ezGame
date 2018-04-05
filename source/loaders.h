@@ -9,7 +9,7 @@
 template<typename Data>
 class Loader {
 protected:
-	typedef std::unordered_map<std::string, Data> Map;
+	using Map = std::unordered_map<std::string, Data>;
 	Map map;
 public:
 	Data& operator[](std::string name) {
@@ -74,5 +74,4 @@ public:
 	~TextLoader() {
 		TTF_CloseFont(font);
 	}
-
 };

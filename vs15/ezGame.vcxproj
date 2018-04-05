@@ -27,9 +27,9 @@
     <ClInclude Include="..\source\gameSDL.h" />
     <ClInclude Include="..\source\interface\audio.h" />
     <ClInclude Include="..\source\interface\color.h" />
-    <ClInclude Include="..\source\interface\colors.h" />
     <ClInclude Include="..\source\interface\common.h" />
     <ClInclude Include="..\source\interface\draw.h" />
+    <ClInclude Include="..\source\interface\drawFragment.h" />
     <ClInclude Include="..\source\interface\extern.h" />
     <ClInclude Include="..\source\interface\ez.h" />
     <ClInclude Include="..\source\interface\ezGame.h" />
