@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <unordered_map>
+#include <memory>
 
 #include "../SDL2/include/SDL_mixer.h"
 #include "../SDL2/include/SDL_image.h"
@@ -19,6 +20,8 @@ public:
 		else return data->second;
 	}
 };
+
+using MusicP = std::unique_ptr<Mix_Music, void(*)(Mix_Music*)>;
 
 struct MusicWrapper {
 	Mix_Music* data;
@@ -74,4 +77,13 @@ public:
 	~TextLoader() {
 		TTF_CloseFont(font);
 	}
+};
+
+
+struct Loaders {
+	TextLoader text;
+	TextureLoader texture;
+	Loader<MusicWrapper> music;
+	Loader<ChunkWrapper> chunk;
+	Loaders(SDL_Renderer& renderer) : texture(renderer), text(renderer) {}
 };

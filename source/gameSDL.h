@@ -9,7 +9,7 @@
 #pragma warning( push )
 #pragma warning( disable : 4250)
 
-class GameSDL : public virtual Ez, public WindowSDL {
+class GameImpl : public virtual Ez{
 	using StagePtr = std::unique_ptr<Stage, std::function<void(Stage*)>>;
 	StagePtr stage = nullptr, next = nullptr;
 
@@ -19,8 +19,7 @@ class GameSDL : public virtual Ez, public WindowSDL {
 
 	
 public:
-	GameSDL(std::unique_ptr<Game>);
-	void run();
+	GameImpl(std::unique_ptr<Game>);
 };
 
 #pragma warning( pop ) 

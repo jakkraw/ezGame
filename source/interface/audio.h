@@ -7,6 +7,7 @@ namespace ezGame {
 		Zero, Infinite
 	};
 
+	using Path = std::string;
 	struct Effect {
 		Path path;
 		LoopTimes loopTimes;

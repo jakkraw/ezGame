@@ -2,7 +2,9 @@
   C:\kuba\programming\ezGame\vs15\tests\..\..\tests\assets\music.mp3
   2 File(s) copied
   Generating code
-  All 141 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  8 of 141 functions ( 5.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   tests.vcxproj -> C:\kuba\programming\ezGame\vs15\x64\Release\tests.exe
   tests.vcxproj -> C:\kuba\programming\ezGame\vs15\x64\Release\tests.pdb (Full PDB)

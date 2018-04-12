@@ -3,7 +3,9 @@
   windowSDL.cpp
      Creating library C:\kuba\programming\ezGame\vs15\x64\Release\ezGame.lib and object C:\kuba\programming\ezGame\vs15\x64\Release\ezGame.exp
   Generating code
-  All 1503 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  26 of 1501 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   ezGame.vcxproj -> C:\kuba\programming\ezGame\vs15\x64\Release\ezGame.dll
   ezGame.vcxproj -> C:\kuba\programming\ezGame\vs15\x64\Release\ezGame.pdb (Full PDB)

@@ -4,8 +4,12 @@
 
 namespace ezGame {
 
-	struct Ez : public virtual Window {
+	struct Ez {
 		virtual void goTo(Stage*&&) = 0;
+
+		using Seconds = double;
 		virtual Seconds delta() const = 0;
 	};	
+
+	
 }

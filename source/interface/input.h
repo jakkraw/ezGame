@@ -1,25 +1,19 @@
 #pragma once
 #include "common.h"
-#include "info.h"
-
 
 namespace ezGame {
 	struct KeyState {
 		bool pressed, released, down;
 	};
 
-	class Mouse {
-	public:
-		enum Key {
-			LEFT = 1, MIDDLE, RIGHT
-		};
-
-		using Position = Position;
+	struct Mouse {
+		enum Key { LEFT = 1, MIDDLE, RIGHT };
+		virtual const KeyState key(Key) const = 0;
+		virtual const Position cursor() const = 0;
 	};
 
-	class Keyboard
+	struct Keyboard
 	{
-	public:
 		enum Key {
 			// Numbers according to SDL_Scancodes
 			RIGHT = 79, LEFT, DOWN, UP,
@@ -31,36 +25,14 @@ namespace ezGame {
 			PRINTSCREEN = 70, SCROLLLOCK, PAUSE, INSERT, HOME, PAGEUP, DELETE, END, PAGEDOWN,
 			LCTRL = 224, LSHIFT, LALT, LGUI, RCTRL, RSHIFT, RALT, RGUI
 		};
-		
+		virtual const KeyState key(Key) const = 0;
 	};
 
-	
 
-
-	struct KeyData {
-
-		enum class InputType {
-			Keyboard, Mouse
-		};
-
-
-		InputType type;
-		union {
-			Keyboard keyboardKey;
-			Mouse mouseKey;
-		};
-	};
-
-	struct Input : public virtual Info
+	struct Input
 	{
-		virtual const bool pressed(Mouse::Key) const = 0;
-		virtual const bool pressed(Keyboard::Key) const = 0;
-		virtual const bool down(Mouse::Key) const = 0;
-		virtual const bool down(Keyboard::Key) const = 0;
-		virtual const bool released(Mouse::Key) const = 0;
-		virtual const bool released(Keyboard::Key) const = 0;
-		virtual const Mouse::Position cursor() const = 0;
-		//virtual const std::vector<KeyData> keyData() const = 0;
+		virtual const Mouse& mouse() const = 0;
+		virtual const Keyboard& keyboard() const = 0;
 	};
 }
 
