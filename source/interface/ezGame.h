@@ -1,5 +1,5 @@
 #pragma once
-#include "extern.h"
 #include "game.h"
-#include "ez.h"
-#include "settings.h"
+namespace ezGame {
+	extern  __declspec(dllexport) void _cdecl start(const Game&);
+}

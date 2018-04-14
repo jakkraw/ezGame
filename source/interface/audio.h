@@ -1,6 +1,5 @@
 #pragma once
-#include "common.h"
-
+#include <string>
 namespace ezGame {
 
 	enum class LoopTimes {
@@ -11,7 +10,8 @@ namespace ezGame {
 	struct Effect {
 		Path path;
 		LoopTimes loopTimes;
-		Effect(Path path, LoopTimes loopTimes = LoopTimes::Zero) : path(path), loopTimes(loopTimes){}
+		Effect(Path path, LoopTimes loopTimes = LoopTimes::Zero)
+			: path(path), loopTimes(loopTimes){}
 		const char* cPath() const {
 			return path.c_str();
 		}
@@ -20,12 +20,12 @@ namespace ezGame {
 	struct Music {
 		Path path;
 		LoopTimes loopTimes;
-		Music(Path path, LoopTimes loopTimes = LoopTimes::Zero) : path(path), loopTimes(loopTimes) {}
+		Music(Path path, LoopTimes loopTimes = LoopTimes::Zero)
+			: path(path), loopTimes(loopTimes) {}
 		const char* cPath() const {
 			return path.c_str();
 		}
 	};
-
 
 	struct Audio {
 		virtual void play(const Music&) = 0;

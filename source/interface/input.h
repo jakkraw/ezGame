@@ -1,5 +1,5 @@
 #pragma once
-#include "common.h"
+#include "2d.h"
 
 namespace ezGame {
 	struct KeyState {

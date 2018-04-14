@@ -1,28 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\source\gameSDL.cpp" />
-    <ClCompile Include="..\source\windowSDL.cpp" />
-    <ClCompile Include="..\source\extern.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\source\gameSDL.h" />
-    <ClInclude Include="..\source\loaders.h" />
-    <ClInclude Include="..\source\windowSDL.h" />
     <ClInclude Include="..\source\resources.h" />
     <ClInclude Include="..\source\interface\audio.h">
       <Filter>interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\interface\color.h">
-      <Filter>interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\interface\common.h">
-      <Filter>interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\interface\draw.h">
-      <Filter>interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\interface\ez.h">
       <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="..\source\interface\ezGame.h">
@@ -34,22 +17,16 @@
     <ClInclude Include="..\source\interface\input.h">
       <Filter>interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\interface\settings.h">
-      <Filter>interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\interface\stage.h">
-      <Filter>interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\interface\window.h">
       <Filter>interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\interface\extern.h">
-      <Filter>interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\interface\resolutionInfo.h">
-      <Filter>interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\interface\drawFragment.h">
+    <ClInclude Include="..\source\input.h" />
+    <ClInclude Include="..\source\draw.h" />
+    <ClInclude Include="..\source\audio.h" />
+    <ClInclude Include="..\source\window.h" />
+    <ClInclude Include="..\source\loader.h" />
+    <ClInclude Include="..\source\game.h" />
+    <ClInclude Include="..\source\interface\2d.h">
       <Filter>interface</Filter>
     </ClInclude>
   </ItemGroup>
@@ -57,5 +34,8 @@
     <Filter Include="interface">
       <UniqueIdentifier>{0d2c4f67-8580-4be1-8f6f-0028e687cd1a}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\ezGame.cpp" />
   </ItemGroup>
 </Project>

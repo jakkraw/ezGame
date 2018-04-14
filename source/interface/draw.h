@@ -1,7 +1,5 @@
 #pragma once
-#include "common.h"
-#include "info.h"
-#include "color.h"
+#include "2d.h"
 
 namespace ezGame {
 
@@ -49,9 +47,10 @@ namespace ezGame {
 
 	
 	struct Image {
+		using Angle = double;
 		using Path = std::string;
 		Image(Path path, const Position& topLeft, const Size& size = DEFAULT_SIZE, Angle angle = Radian(0)) : topLeft(topLeft), size(size), path(path), angle(angle) {}
-		Path path; Position topLeft; Size size; Angle angle;
+		Path path; Position topLeft; Size size; Angle degrees;
 
 		const char* cPath() const {
 			return path.c_str();
@@ -72,13 +71,50 @@ namespace ezGame {
 		}
 	};
 
-	struct Draw : public virtual ResolutionInfo {
+	struct Draw {
 		virtual void draw(const Rectangle&) = 0;
 		virtual void draw(const Line&) = 0;
 		virtual void draw(const Point&) = 0;
 		virtual void draw(const Image&) = 0;
 		virtual void draw(const Text&) = 0;
 	};
+
+
+	//struct DrawFragment : public Draw {
+	//	const Position offset;
+	//	const Size size;
+	//	const Ratio resRatio;
+	//	const Resolution res;
+	//	Draw& draw;
+	//	DrawFragment(Draw& draw, const Position& offset, const Size& size, const Resolution& res)
+	//		:
+	//		draw(draw),
+	//		offset(offset),
+	//		size(size),
+	//		resRatio(draw.resolution() / res),
+	//		res(res) {}
+
+
+	//	// Inherited via Draw
+	//	const Resolution resolution() const override {
+	//		return res;
+	//	}
+
+	//	virtual void draw(const Rectangle &r) override {
+	//		Rectangle nr = r;
+	//		//nr.topLeft += offset;
+	//	}
+
+	//	virtual void draw(const Line &) override;
+
+	//	virtual void draw(const Point &) override;
+
+	//	virtual void draw(const Image &) override;
+
+	//	virtual void draw(const Text &) override;
+
+	//};
+
 
 
 }
