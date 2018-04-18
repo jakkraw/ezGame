@@ -24,17 +24,19 @@
   <ItemGroup>
     <ClInclude Include="..\source\audio.h" />
     <ClInclude Include="..\source\draw.h" />
-    <ClInclude Include="..\source\game.h" />
+    <ClInclude Include="..\source\font.h" />
+    <ClInclude Include="..\source\icon.h" />
     <ClInclude Include="..\source\input.h" />
     <ClInclude Include="..\source\interface\audio.h" />
     <ClInclude Include="..\source\interface\2d.h" />
     <ClInclude Include="..\source\interface\draw.h" />
+    <ClInclude Include="..\source\interface\drawView.h" />
     <ClInclude Include="..\source\interface\ezGame.h" />
     <ClInclude Include="..\source\interface\game.h" />
     <ClInclude Include="..\source\interface\input.h" />
+    <ClInclude Include="..\source\interface\relative2d.h" />
     <ClInclude Include="..\source\interface\window.h" />
     <ClInclude Include="..\source\loader.h" />
-    <ClInclude Include="..\source\resources.h" />
     <ClInclude Include="..\source\window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -155,6 +157,7 @@ xcopy /y %o%\lib\$(Platform)\*.dll $(OutDir)</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../SDL2/include/</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -187,6 +190,7 @@ xcopy /y %o%\lib\$(Platform)\*.dll $(OutDir)</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../SDL2/include/</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
