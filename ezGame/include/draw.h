@@ -1,67 +1,43 @@
 #pragma once
-#include "common.h"
-#include "info.h"
-#include "color.h"
+#include "2d.h"
+#include "relative2d.h"
 
 namespace ezGame {
 
-	
+	struct Color {
+		//[0,1]
+		using Opacity = double;
+		using Component = unsigned char;
+		Component red, green, blue; 
+		Opacity opacity = 1.f;
 
-	struct Point {
-		Point(const Position& p, const Color& color = WHITE) : x(p.x), y(p.y), color(color) {}
-		Pixel x, y; Color color;
+		Color(const Component red, const Component green, const Component blue, const Opacity opacity = 1.f) :
+			red(red), green(green), blue(blue), opacity(opacity) {}
+		
+		Color with(const Opacity opacity) const { return { red, green, blue, opacity }; }
 	};
 
-	enum class ShapeType {
-		Filled,
-		Outline
+	const Color RED(255, 0, 0), GREEN(0, 255, 0), BLUE(0, 0, 255), WHITE(255, 255, 255), BLACK(0, 0, 0);
+
+	struct Draw 
+	{
+		using Text = const char*;
+		virtual void text(Text, const Area& maximal, const Color& font = WHITE) = 0;
+		virtual void text(Text, const RelativeArea& maximal, const Color& font = WHITE) = 0;
+
+		enum class Type { FILLED, OUTLINE };
+		virtual void rectangle(const Area&, const Color& = BLACK, Type = Type::FILLED) = 0;
+		virtual void rectangle(const RelativeArea&, const Color& = BLACK, Type = Type::FILLED) = 0;
+
+		virtual void point(const Position&, const Color& = WHITE) = 0;
+		virtual void point(const RelativePosition&, const Color& = WHITE) = 0;
+
+		virtual void line(const Line&, const Color& = WHITE) = 0;
+		virtual void line(const RelativeLine&, const Color& = WHITE) = 0;
+
+		using Path = const char*; using Degrees = double;
+		virtual void image(Path, const Area&, Degrees rotation = 0) = 0;
+		virtual void image(Path, const RelativeArea&, Degrees rotation = 0) = 0;
 	};
-
-	struct Rectangle {
-		Rectangle(const Position& topLeft, const Size& size, Color color = BLACK, ShapeType type = ShapeType::Filled) : topLeft(topLeft), size(size), color(color), type(type) {}
-		Position topLeft; Size size; Color color; ShapeType type;
-	};
-
-	struct Line {
-		Line::Line(const Position& begin, const Position& end, Color color = WHITE) : begin(begin), end(end), color(color) {}
-		Position begin, end; Color color;
-	};
-
-	struct Circle {
-		Circle(const Position& center, Pixel radius, Color color = WHITE, ShapeType type = ShapeType::Outline) : mouse(center), radius(radius), color(color), type(type) {}
-		Position mouse; Pixel radius; Color color; ShapeType type;
-	};
-
-	struct Image {
-		Image(Path path, const Position& topLeft, const Size& size = DEFAULT_SIZE, Angle angle = Radian(0)) : topLeft(topLeft), size(size), path(path), angle(angle) {}
-		Path path; Position topLeft; Size size; Angle angle;
-
-		const char* cPath() const {
-			return path.c_str();
-		}
-
-	};
-
-	struct Text {
-		TextString textString;
-		Color color;
-		Position topLeft;
-		Size max;
-		Text(TextString textString, const Position& topLeft, const Size& max = DEFAULT_SIZE, Color color = WHITE) : textString(textString), color(color), max(max), topLeft(topLeft) {}
-
-		const char* cText() const {
-			return textString.c_str();
-		}
-	};
-
-	struct Draw : public virtual ResolutionInfo {
-		virtual void draw(const Rectangle&) = 0;
-		virtual void draw(const Line&) = 0;
-		virtual void draw(const Point&) = 0;
-		virtual void draw(const Image&) = 0;
-		virtual void draw(const Text&) = 0;
-
-	};
-
 
 }

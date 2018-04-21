@@ -1,5 +1,0 @@
-﻿  ezGame.cpp
-     Creating library C:\kuba\programming\ezGame\vs15\x64\Release\ezGame.lib and object C:\kuba\programming\ezGame\vs15\x64\Release\ezGame.exp
-  Generating code
-  Compiler terminating.  Please wait........... Abort complete.
-C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(637,5): error MSB6006: "link.exe" exited with code 4.

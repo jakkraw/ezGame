@@ -15,4 +15,9 @@ public:
 			return map.emplace(name, Data(name.c_str())).first->second;
 		else return data->second;
 	}
+
+	void clear(){
+		map.clear();
+	}
+
 };

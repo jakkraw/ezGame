@@ -19,11 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\audio.cpp" />
     <ClCompile Include="..\source\ezGame.cpp" />
+    <ClCompile Include="..\source\font.cpp" />
+    <ClCompile Include="..\source\icon.cpp" />
+    <ClCompile Include="..\source\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\audio.h" />
     <ClInclude Include="..\source\draw.h" />
+    <ClInclude Include="..\source\ez.h" />
+    <ClInclude Include="..\source\flow.h" />
     <ClInclude Include="..\source\font.h" />
     <ClInclude Include="..\source\icon.h" />
     <ClInclude Include="..\source\input.h" />
@@ -37,6 +43,7 @@
     <ClInclude Include="..\source\interface\relative2d.h" />
     <ClInclude Include="..\source\interface\window.h" />
     <ClInclude Include="..\source\loader.h" />
+    <ClInclude Include="..\source\timer.h" />
     <ClInclude Include="..\source\window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -52,7 +59,7 @@
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -65,7 +72,7 @@
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -96,7 +103,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../SDL2/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\kuba\programming\ezGame\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <PreBuildEvent />
     <Link />
@@ -125,7 +132,7 @@ xcopy /y %o%\lib\$(Platform)\*.dll $(OutDir)</Command>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../SDL2/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\kuba\programming\ezGame\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <PreBuildEvent />
     <Link />
@@ -156,7 +163,7 @@ xcopy /y %o%\lib\$(Platform)\*.dll $(OutDir)</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../SDL2/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\kuba\programming\ezGame\SDL2\include</AdditionalIncludeDirectories>
       <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
@@ -189,7 +196,7 @@ xcopy /y %o%\lib\$(Platform)\*.dll $(OutDir)</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../SDL2/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\kuba\programming\ezGame\SDL2\include</AdditionalIncludeDirectories>
       <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>

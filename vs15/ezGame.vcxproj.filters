@@ -16,13 +16,9 @@
     <ClInclude Include="..\source\interface\input.h">
       <Filter>interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\interface\window.h">
-      <Filter>interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\input.h" />
     <ClInclude Include="..\source\draw.h" />
     <ClInclude Include="..\source\audio.h" />
-    <ClInclude Include="..\source\window.h" />
     <ClInclude Include="..\source\loader.h" />
     <ClInclude Include="..\source\interface\2d.h">
       <Filter>interface</Filter>
@@ -35,6 +31,13 @@
     <ClInclude Include="..\source\interface\drawView.h">
       <Filter>interface</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\timer.h" />
+    <ClInclude Include="..\source\flow.h" />
+    <ClInclude Include="..\source\ez.h" />
+    <ClInclude Include="..\source\interface\window.h">
+      <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\window.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="interface">
@@ -43,5 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\ezGame.cpp" />
+    <ClCompile Include="..\source\window.cpp" />
+    <ClCompile Include="..\source\audio.cpp" />
+    <ClCompile Include="..\source\icon.cpp" />
+    <ClCompile Include="..\source\font.cpp" />
   </ItemGroup>
 </Project>

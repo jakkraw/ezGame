@@ -1,2 +1,35 @@
 ﻿  ezGame.cpp
-  Compiler terminating.  Please wait........... Abort complete.
+  ezGame.vcxproj -> C:\kuba\programming\ezGame\vs15\x64\Debug\ezGame.dll
+  ezGame.vcxproj -> C:\kuba\programming\ezGame\vs15\x64\Debug\ezGame.pdb (Partial PDB)
+  C:\kuba\programming\ezGame\vs15\x64\Debug\ezGame.lib
+  1 File(s) copied
+  C:\kuba\programming\ezGame\vs15\x64\Debug\ezGame.dll
+  1 File(s) copied
+  C:\kuba\programming\ezGame\vs15\..\source\interface\2d.h
+  C:\kuba\programming\ezGame\vs15\..\source\interface\audio.h
+  C:\kuba\programming\ezGame\vs15\..\source\interface\draw.h
+  C:\kuba\programming\ezGame\vs15\..\source\interface\drawView.h
+  C:\kuba\programming\ezGame\vs15\..\source\interface\ezGame.h
+  C:\kuba\programming\ezGame\vs15\..\source\interface\game.h
+  C:\kuba\programming\ezGame\vs15\..\source\interface\input.h
+  C:\kuba\programming\ezGame\vs15\..\source\interface\relative2d.h
+  C:\kuba\programming\ezGame\vs15\..\source\interface\window.h
+  9 File(s) copied
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\ezGame.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libFLAC-8.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libfreetype-6.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libjpeg-9.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libmodplug-1.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libmpg123-0.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libogg-0.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libpng16-16.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libtiff-5.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libvorbis-0.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libvorbisfile-3.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\libwebp-7.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\SDL2.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\SDL2_image.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\SDL2_mixer.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\SDL2_ttf.dll
+  C:\kuba\programming\ezGame\vs15\..\ezGame\lib\x64\zlib1.dll
+  17 File(s) copied

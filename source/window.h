@@ -1,76 +1,50 @@
+#pragma once
 #include <atomic>
+#include <memory>
 #include "SDL.h"
+#pragma comment(lib, "SDL2")
 
-#include "interface\window.h"
-using namespace ezGame;
-class Window : 
-	public virtual ::ezGame::Window,
-	public virtual ::ezGame::Window::Settings 
+#include "interface/window.h"
+
+class WindowI : 
+	public virtual ezGame::Window,
+	public virtual ezGame::Window::Settings
 {
-	SDL_Window& window;
-	SDL_Renderer& renderer;
+
+	using WindowSDL = std::unique_ptr<SDL_Window, void(*)(SDL_Window*)>;
+	WindowSDL windowSDL = { nullptr , SDL_DestroyWindow };
+
+	using RendererSDL = std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)>;
+	RendererSDL rendererSDL = { nullptr, SDL_DestroyRenderer };
+
 	std::atomic<bool> open = true;
 public:	
-	Window(SDL_Window& window, SDL_Renderer& renderer)
-		: renderer(renderer), window(window) {}
 
-	virtual void update(const SDL_Event& event) {
-		switch (event.type)
-		{
-		case SDL_WINDOWEVENT:
-			if (event.window.event == SDL_WINDOWEVENT_CLOSE)
-				close();
-			break;
-		}
-	}
+	WindowI(Title title, Resolution res, ezGame::Size size);
 
-	bool isOpen() { return open; }
+	SDL_Renderer& renderer() const;
 
-	virtual void close() override { open = false; }
+	~WindowI();
+
+	void update(const SDL_Event& event);
+	bool isOpen() const;
+
+	void close() override;
 
 	// Inherited via Window
-	virtual Settings & settings() const override { return (Settings&)*this; }
+	Window::Settings & settings() const override;
 
 	// Inherited via Settings
-	virtual void set(Title title) override {
-		SDL_SetWindowTitle(&window, title);
-	}
-	virtual const Title title() const override {
-		SDL_GetWindowTitle(&window);
-	}
+	void set(Title title) override;
+	Title title() const override;
 
-	virtual void set(CursorVisibility cv) override {
-		switch (cv) {
-		case CursorVisibility::Hidden: SDL_ShowCursor(0); break;
-		case CursorVisibility::Shown: SDL_ShowCursor(1); break;
-		}
-	}
-	virtual const CursorVisibility cursorVisibility() const override {
-		return SDL_ShowCursor(-1) ? CursorVisibility::Shown : CursorVisibility::Hidden;
-	}
+	void set(CursorVisibility cv) override;
+	CursorVisibility cursorVisibility() const override;
 
-	virtual void set(Type type) override {
-		switch (type) {
-		case Type::Fullscreen: 
-			SDL_SetWindowFullscreen(&window, SDL_WINDOW_FULLSCREEN); break;
-		case Type::Windowed: 
-			SDL_SetWindowFullscreen(&window, SDL_WINDOW_SHOWN); break;
-		}
-	}
-	virtual const Type type() const override {
-		SDL_GetWindowFlags(&window);
-		return SDL_GetWindowFlags(&window) & SDL_WINDOW_FULLSCREEN
-			? Type::Fullscreen : Type::Windowed;
-	}
+	void set(Type type) override;
+	Type type() const override;
 
-	virtual void set(Resolution resolution) override {
-		SDL_SetWindowSize(&window, resolution.width, resolution.height);
-		SDL_RenderSetLogicalSize(&renderer, resolution.width, resolution.height);
-	}
-	virtual Resolution resolution() const override {
-		int x,y;
-		SDL_RenderGetLogicalSize(&renderer, &x, &y);
-		return { x,y };
-	}
+	void set(Resolution resolution) override;
+	Resolution resolution() const override;
 
 };
