@@ -38,6 +38,7 @@
       <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="..\source\window.h" />
+    <ClInclude Include="..\source\SDL2.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="interface">
@@ -49,5 +50,6 @@
     <ClCompile Include="..\source\window.cpp" />
     <ClCompile Include="..\source\icon.cpp" />
     <ClCompile Include="..\source\font.cpp" />
+    <ClCompile Include="..\source\SDL2.cpp" />
   </ItemGroup>
 </Project>

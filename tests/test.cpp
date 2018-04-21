@@ -11,7 +11,7 @@ struct Stage1 : Stage {
 		if (ez.key(Keyboard::N2).pressed) return ez.moveTo<Stage2>();
 		if (ez.key(Keyboard::Q).pressed) return ez.quit();
 		ez.drawImage("avatar.png", { ez.cursorRelative(), { 0.5, 0.5 } });
-		ez.drawText(("Delta: " + std::to_string(ez.delta())).c_str(), RelativeArea{ {0,0}, {0.40, 0.10} }, WHITE);
+		ez.drawText("Delta: " + Text(ez.delta()), RelativeArea{ {0,0}, {0.40, 0.10} }, WHITE);
 	}
 };
 
@@ -31,7 +31,8 @@ struct TestGame : Game{
 	EntryStage entry() const override { return Entry<Stage1>(); }
 };
 
+
 #include <Windows.h>
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pCmdLine, int nCmdShow) {
+int WINAPI WinMain(HINSTANCE,HINSTANCE ,PSTR ,int ) {
 	start(TestGame());
 }

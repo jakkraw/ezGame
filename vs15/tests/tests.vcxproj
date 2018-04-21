@@ -84,7 +84,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>NotSet</SubSystem>
     </Link>
     <PreBuildEvent>
       <Command>xcopy /y $(ProjectDir)..\..\tests\assets\* $(OutDir)</Command>
@@ -97,7 +97,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>NotSet</SubSystem>
     </Link>
     <PreBuildEvent>
       <Command>xcopy /y $(ProjectDir)..\..\tests\assets\* $(OutDir)</Command>

@@ -1,6 +1,8 @@
 #pragma once
 #include "2d.h"
 #include "relative2d.h"
+#include <string>
+#include <sstream>
 
 namespace ezGame {
 
@@ -18,6 +20,25 @@ namespace ezGame {
 	};
 
 	const Color RED(255, 0, 0), GREEN(0, 255, 0), BLUE(0, 0, 255), WHITE(255, 255, 255), BLACK(0, 0, 0);
+
+
+	struct Text{
+		Text(const char* c) : s(c){}
+		Text(const double c) : s(::std::to_string(c)) {}
+		Text(const int c) : s(::std::to_string(c)) {}
+		Text(const bool c) : s(::std::to_string(c)) {}
+		Text(std::string s) : s(std::move(s)){}
+		operator std::string() const { return s; }
+		operator const char* () const { return s.c_str(); }
+	private:
+		std::string s;
+	};
+
+	inline Text operator + (Text a, Text b){
+		::std::stringstream s;
+		s << a << b;
+		return Text(s.str());
+	}
 
 	struct Draw 
 	{

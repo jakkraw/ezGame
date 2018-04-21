@@ -22,6 +22,7 @@
     <ClCompile Include="..\source\ezGame.cpp" />
     <ClCompile Include="..\source\font.cpp" />
     <ClCompile Include="..\source\icon.cpp" />
+    <ClCompile Include="..\source\SDL2.cpp" />
     <ClCompile Include="..\source\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +43,7 @@
     <ClInclude Include="..\source\interface\relative2d.h" />
     <ClInclude Include="..\source\interface\window.h" />
     <ClInclude Include="..\source\loader.h" />
+    <ClInclude Include="..\source\SDL2.h" />
     <ClInclude Include="..\source\timer.h" />
     <ClInclude Include="..\source\window.h" />
   </ItemGroup>

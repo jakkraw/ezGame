@@ -7,9 +7,12 @@
 #include "flow.h"
 #include "timer.h"
 #include "ez.h"
+#include "SDL2.h"
+
 
 void ezGame::start(const Game& game)
 {
+	const SDL2 sdl;
 	WindowI window("ezGame", WindowI::Resolution(640, 480), Size{ 640, 480 });
 	DrawI draw(window.renderer());
 	AudioI audio;

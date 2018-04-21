@@ -4,33 +4,30 @@
 
 using namespace ezGame;
 
-WindowI::WindowI(Title title, Resolution res, Size size) {
-	SDL_Init(SDL_INIT_VIDEO);
-
-	windowSDL.reset(SDL_CreateWindow(title,
+WindowI::WindowI(Title t, Resolution r, Size s) {
+	windowSDL.reset(SDL_CreateWindow(t,
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		size.width, size.height, NULL));
+		s.width, s.height, NULL));
 
 	resource::setIcon(*windowSDL);
 	SDL_SetWindowGrab(&*windowSDL, SDL_TRUE);
-	SDL_WarpMouseInWindow(&*windowSDL, res.width / 2, res.height / 2);
+	SDL_WarpMouseInWindow(&*windowSDL, r.width / 2, r.height / 2);
 
 	rendererSDL.reset(SDL_CreateRenderer(&*windowSDL, -1,
-		SDL_RendererFlags::SDL_RENDERER_ACCELERATED |
-		SDL_RendererFlags::SDL_RENDERER_TARGETTEXTURE));
+		SDL_RENDERER_ACCELERATED |
+		SDL_RENDERER_TARGETTEXTURE));
 
-	SDL_SetRenderDrawBlendMode(&*rendererSDL, SDL_BlendMode::SDL_BLENDMODE_BLEND);
-	SDL_RenderSetLogicalSize(&*rendererSDL, res.width, res.height);
+	SDL_SetRenderDrawBlendMode(&*rendererSDL, SDL_BLENDMODE_BLEND);
+	SDL_RenderSetLogicalSize(&*rendererSDL, r.width, r.height);
 }
 
-WindowI::~WindowI() { SDL_Quit(); }
-
-SDL_Renderer & WindowI::renderer() const { return *rendererSDL; }
+SDL_Renderer & WindowI::renderer() const{
+	return *rendererSDL;
+}
 
 void WindowI::update(const SDL_Event & event) {
-	switch (event.type)
-	{
+	switch (event.type){
 	case SDL_WINDOWEVENT:
 		if (event.window.event == SDL_WINDOWEVENT_CLOSE)
 			close();
@@ -42,14 +39,12 @@ bool WindowI::isOpen() const { return open; }
 
 void WindowI::close() { open = false; }
 
-// Inherited via Window
+Window::Settings & WindowI::settings() const { 
+	return (Window::Settings&)*this;
+}
 
-Window::Settings & WindowI::settings() const { return (Window::Settings&)*this; }
-
-// Inherited via Settings
-
-void WindowI::set(Title title) {
-	SDL_SetWindowTitle(&*windowSDL, title);
+void WindowI::set(Title t) {
+	SDL_SetWindowTitle(&*windowSDL, t);
 }
 
 Window::Settings::Title WindowI::title() const {
@@ -82,9 +77,9 @@ Window::Settings::Type WindowI::type() const {
 		? Type::FULLSCREEN : Type::WINDOWED;
 }
 
-void WindowI::set(Resolution resolution) {
-	SDL_SetWindowSize(&*windowSDL, resolution.width, resolution.height);
-	SDL_RenderSetLogicalSize(&*rendererSDL, resolution.width, resolution.height);
+void WindowI::set(Resolution r) {
+	SDL_SetWindowSize(&*windowSDL, r.width, r.height);
+	SDL_RenderSetLogicalSize(&*rendererSDL, r.width, r.height);
 }
 
 Window::Settings::Resolution WindowI::resolution() const {

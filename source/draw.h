@@ -1,8 +1,6 @@
 #pragma once
 #include "SDL.h"
-
 #include "SDL_image.h"
-#pragma comment(lib, "SDL2_image")
 
 #include "loader.h"
 struct SurfaceWrapper {
@@ -37,18 +35,9 @@ public:
 #include "font.h"
 struct Font {
 	using FontData = std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>;
-	FontData font = { nullptr, TTF_CloseFont };
-	Font() {
-		TTF_Init();
-		font.reset(resource::createFont());
-	}
-	~Font() { 
-		font.reset();
-		TTF_Quit(); 
-	}
+	FontData font = { resource::createFont(), TTF_CloseFont };
 	operator TTF_Font*() const { return &*font; }
 };
-
 
 #include "interface/draw.h"
 //struct RelativeConversion {
@@ -59,7 +48,7 @@ struct Font {
 //};
 
 using namespace ezGame;
-class DrawI : public ezGame::Draw {
+class DrawI : public Draw {
 	SDL_Renderer& renderer;
 	TextureLoader textures;
 	Font font;
@@ -91,13 +80,10 @@ class DrawI : public ezGame::Draw {
 
 
 public:
-	explicit DrawI(SDL_Renderer& renderer) : renderer(renderer), textures(renderer), resolution(getResolution()) {
-		IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_JPG);
-	}
-
-	~DrawI() { 
-		IMG_Quit(); 
-	}
+	explicit DrawI(SDL_Renderer& renderer) : 
+	renderer(renderer), 
+	textures(renderer),
+	resolution(getResolution()) {}
 
 	void reset() {
 		SDL_RenderPresent(&renderer);
@@ -170,5 +156,4 @@ public:
 	void text(Text text, const RelativeArea & maximal, const Color & font) override {
 		this->text(text, convert(maximal), font);
 	}
-
 };

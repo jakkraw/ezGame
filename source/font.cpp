@@ -7939,7 +7939,6 @@ const int exampleFont_size = 253780;
 
 namespace resource {
 	TTF_Font* createFont() {
-
 		return TTF_OpenFontRW(SDL_RWFromConstMem(exampleFont, exampleFont_size), true, 86);
 	}
 }

@@ -2,7 +2,6 @@
 #include <atomic>
 #include <memory>
 #include "SDL.h"
-#pragma comment(lib, "SDL2")
 
 #include "interface/window.h"
 
@@ -23,8 +22,6 @@ public:
 	WindowI(Title title, Resolution res, ezGame::Size size);
 
 	SDL_Renderer& renderer() const;
-
-	~WindowI();
 
 	void update(const SDL_Event& event);
 	bool isOpen() const;
