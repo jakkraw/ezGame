@@ -47,7 +47,6 @@
   <ItemGroup>
     <ClCompile Include="..\source\ezGame.cpp" />
     <ClCompile Include="..\source\window.cpp" />
-    <ClCompile Include="..\source\audio.cpp" />
     <ClCompile Include="..\source\icon.cpp" />
     <ClCompile Include="..\source\font.cpp" />
   </ItemGroup>

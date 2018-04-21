@@ -23,13 +23,35 @@ class AudioI : public ezGame::Audio {
 	Loader<ChunkWrapper> chunk;
 	short channel = 0;
 public:
-	AudioI();
-	~AudioI();
+	AudioI() {
+		Mix_Init(MIX_INIT_MP3 | MIX_INIT_FLAC | MIX_INIT_OGG);
+		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
+	}
+	~AudioI() {
+		music.clear();
+		chunk.clear();
+		Mix_CloseAudio();
+		Mix_Quit();
+	}
+	void playMusic(Path path, Loops l) override{
+		Mix_PlayMusic(music[path].data, l == Loops::INFINITE ? -1 : 0);
+	}
 
-	// Inherited via Audio
-	void playMusic(Path, Loops) override;
-	void playEffect(Path, Loops) override;
-	void stopMusic() override;
-	void stopAllEffects() override;
-	void stopAllSound() override;
+	void playEffect(Path path, Loops l) override{
+		channel = channel++ % 16;
+		Mix_PlayChannel(channel, chunk[path].data, l == Loops::INFINITE ? -1 : 0);
+	}
+
+	void stopMusic() override{
+		Mix_HaltMusic();
+	}
+
+	void stopAllEffects() override{
+		Mix_HaltChannel(-1);
+	}
+
+	void stopAllSound() override{
+		stopMusic();
+		stopAllEffects();
+	}
 };

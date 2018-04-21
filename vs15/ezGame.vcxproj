@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\audio.cpp" />
     <ClCompile Include="..\source\ezGame.cpp" />
     <ClCompile Include="..\source\font.cpp" />
     <ClCompile Include="..\source\icon.cpp" />
