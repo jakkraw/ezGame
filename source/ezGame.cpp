@@ -7,7 +7,7 @@
 #include "flow.h"
 #include "timer.h"
 #include "ez.h"
-#include "SDL2.h"
+#include "sdl2.h"
 
 
 void ezGame::start(const Game& game)

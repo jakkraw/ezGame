@@ -11,7 +11,7 @@ WindowI::WindowI(Title t, Resolution r, Size s) {
 		s.width, s.height, NULL));
 
 	resource::setIcon(*windowSDL);
-	SDL_SetWindowGrab(&*windowSDL, SDL_TRUE);
+	//SDL_SetWindowGrab(&*windowSDL, SDL_TRUE);
 	SDL_WarpMouseInWindow(&*windowSDL, r.width / 2, r.height / 2);
 
 	rendererSDL.reset(SDL_CreateRenderer(&*windowSDL, -1,
@@ -85,5 +85,5 @@ void WindowI::set(Resolution r) {
 Window::Settings::Resolution WindowI::resolution() const {
 	int x, y;
 	SDL_RenderGetLogicalSize(&*rendererSDL, &x, &y);
-	return{ x,y };
+	return Resolution( x,y );
 }

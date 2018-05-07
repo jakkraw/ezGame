@@ -1,5 +1,5 @@
 #pragma once
-#include "SDL_image.h"
+#include "sdl2.h"
 
 namespace resource{
 	void setIcon(SDL_Window& window);

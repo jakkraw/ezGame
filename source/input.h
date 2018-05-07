@@ -83,7 +83,7 @@ public:
 			_mouse.setDown(event.button.button);
 			break;
 		case SDL_MOUSEMOTION:
-			_mouse.setCursor({ event.motion.x + 1, event.motion.y + 1 });
+			_mouse.setCursor(Position(event.motion.x + 1, event.motion.y + 1));
 			break;
 		}
 	}

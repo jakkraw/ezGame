@@ -22,7 +22,6 @@
     <ClCompile Include="..\source\ezGame.cpp" />
     <ClCompile Include="..\source\font.cpp" />
     <ClCompile Include="..\source\icon.cpp" />
-    <ClCompile Include="..\source\SDL2.cpp" />
     <ClCompile Include="..\source\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -43,7 +42,7 @@
     <ClInclude Include="..\source\interface\relative2d.h" />
     <ClInclude Include="..\source\interface\window.h" />
     <ClInclude Include="..\source\loader.h" />
-    <ClInclude Include="..\source\SDL2.h" />
+    <ClInclude Include="..\source\sdl2.h" />
     <ClInclude Include="..\source\timer.h" />
     <ClInclude Include="..\source\window.h" />
   </ItemGroup>
@@ -60,7 +59,7 @@
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -73,7 +72,7 @@
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -115,6 +114,9 @@
     </Link>
     <PostBuildEvent>
       <Command>SET o=$(ProjectDir)..\$(ProjectName)
+SET sdl=$(ProjectDir)..\SDL2
+
+xcopy /y %sdl%\lib\$(Platform)\*.dll $(OutDir)
 
 xcopy /y $(OutDir)$(TargetName).lib %o%\lib\$(Platform)\
 xcopy /y $(OutDir)$(TargetName).dll %o%\lib\$(Platform)\
@@ -144,6 +146,9 @@ xcopy /y %o%\lib\$(Platform)\*.dll $(OutDir)</Command>
     </Link>
     <PostBuildEvent>
       <Command>SET o=$(ProjectDir)..\$(ProjectName)
+SET sdl=$(ProjectDir)..\SDL2
+
+xcopy /y %sdl%\lib\$(Platform)\*.dll $(OutDir)
 
 xcopy /y $(OutDir)$(TargetName).lib %o%\lib\$(Platform)\
 xcopy /y $(OutDir)$(TargetName).dll %o%\lib\$(Platform)\
@@ -177,6 +182,9 @@ xcopy /y %o%\lib\$(Platform)\*.dll $(OutDir)</Command>
     <PreBuildEvent />
     <PostBuildEvent>
       <Command>SET o=$(ProjectDir)..\$(ProjectName)
+SET sdl=$(ProjectDir)..\SDL2
+
+xcopy /y %sdl%\lib\$(Platform)\*.dll $(OutDir)
 
 xcopy /y $(OutDir)$(TargetName).lib %o%\lib\$(Platform)\
 xcopy /y $(OutDir)$(TargetName).dll %o%\lib\$(Platform)\
@@ -210,6 +218,9 @@ xcopy /y %o%\lib\$(Platform)\*.dll $(OutDir)</Command>
     <PreBuildEvent />
     <PostBuildEvent>
       <Command>SET o=$(ProjectDir)..\$(ProjectName)
+SET sdl=$(ProjectDir)..\SDL2
+
+xcopy /y %sdl%\lib\$(Platform)\*.dll $(OutDir)
 
 xcopy /y $(OutDir)$(TargetName).lib %o%\lib\$(Platform)\
 xcopy /y $(OutDir)$(TargetName).dll %o%\lib\$(Platform)\

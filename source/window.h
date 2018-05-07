@@ -1,7 +1,7 @@
 #pragma once
 #include <atomic>
 #include <memory>
-#include "SDL.h"
+#include "sdl2.h"
 
 #include "interface/window.h"
 

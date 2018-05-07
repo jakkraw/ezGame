@@ -1,5 +1,5 @@
 #pragma once
-#include "SDL_ttf.h"
+#include "sdl2.h"
 
 namespace resource {
 	TTF_Font* createFont();

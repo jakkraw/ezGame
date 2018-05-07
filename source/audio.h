@@ -1,7 +1,6 @@
 #pragma once
 #include "loader.h"
-#include "SDL_mixer.h"
-
+#include "sdl2.h"
 struct MusicWrapper {
 	Mix_Music* data;
 	MusicWrapper(MusicWrapper&& m) : data(m.data) { m.data = nullptr; }
@@ -20,15 +19,13 @@ struct ChunkWrapper {
 class AudioI : public ezGame::Audio {
 	Loader<MusicWrapper> music;
 	Loader<ChunkWrapper> chunk;
-	short channel = 0;
 public:
 	void playMusic(Path path, Loops l) override{
-		Mix_PlayMusic(music[path].data, l == Loops::INFINITE ? -1 : 0);
+		Mix_PlayMusic(music[path].data, (int)l);
 	}
 
 	void playEffect(Path path, Loops l) override{
-		channel = channel++ % 16;
-		Mix_PlayChannel(channel, chunk[path].data, l == Loops::INFINITE ? -1 : 0);
+		Mix_PlayChannel(-1, chunk[path].data, (int)l);
 	}
 
 	void stopMusic() override{

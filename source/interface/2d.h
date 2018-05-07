@@ -1,10 +1,10 @@
 #pragma once
 namespace ezGame {
-	using Pixel = int;
+	using Pixel = double;
 
 	struct Position {
 		Pixel x, y;
-		Position(Pixel x, Pixel y) : x(x), y(y) {}
+		Position(const Pixel& x, const Pixel& y) : x(x), y(y) {}
 		Position operator + (const Position& pos) const { return{ x + pos.x, y + pos.y }; }
 		Position operator - (const Position& pos) const { return{ x - pos.x, y - pos.y }; }
 	};
@@ -29,7 +29,14 @@ namespace ezGame {
 		Ratio operator / (const Size& b) const { 
 			return{ width / Ratio::scale(b.width), height / Ratio::scale(b.height) };
 		}
+
+
+		Size operator * (const Ratio& b) const {
+			return{ width * b.width, height * b.height };
+		}
 	};
+
+
 	
 	inline bool operator == (const Size& a, const Size& b) {
 		return a.height == b.height && a.width == b.width;

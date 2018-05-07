@@ -57,12 +57,19 @@ namespace ezGame {
 		virtual ~Stage() = default;
 	};
 
+	struct Game;
+	extern  __declspec(dllexport) void start(const Game&);
+
 	struct Game {
 		using EntryStage = std::unique_ptr<Stage>;
 		virtual EntryStage entry() const = 0;
 		virtual void setup(Settings&) const {};
 
 		Stage* createEntry() const { return entry().release(); }
+
+		void start(){
+			ezGame::start(*this);
+		}
 
 		protected:
 			template<class FirstStage, class...ConstructorParameters>

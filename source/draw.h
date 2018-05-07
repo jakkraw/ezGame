@@ -1,6 +1,5 @@
 #pragma once
-#include "SDL.h"
-#include "SDL_image.h"
+#include "sdl2.h"
 
 #include "loader.h"
 struct SurfaceWrapper {
@@ -62,7 +61,7 @@ class DrawI : public Draw {
 	Size getResolution() {
 		int w, h;
 		SDL_RenderGetLogicalSize(&renderer, &w, &h);
-		return { w,h };
+		return Size( w,h);
 	}
 
 	virtual Position convert(const RelativePosition& rp) const{
@@ -72,10 +71,10 @@ class DrawI : public Draw {
 		return { Pixel(rs.width * resolution.width) , Pixel(rs.height * resolution.height) };
 	}
 	virtual Area convert(const RelativeArea& ra) const {
-		return { convert(ra.position), convert(ra.size) };
+		return { convert(ra.topLeft), convert(ra.size) };
 	}
 	virtual Line convert(const RelativeLine& rl) const {
-		return { convert(rl.begin),convert(rl.end) };
+		return { convert(rl.start),convert(rl.end) };
 	}
 
 
@@ -148,7 +147,7 @@ public:
 			h = int(h * multiplier);
 		}
 
-		auto rect = SDL_Rect{ maximal.topLeft.x , maximal.topLeft.y , w, h };
+		auto rect = SDL_Rect{ (int)maximal.topLeft.x , (int)maximal.topLeft.y , (int)w, (int)h };
 		SDL_RenderCopyEx(&renderer, mTexture, nullptr, &rect, 0, nullptr, SDL_RendererFlip::SDL_FLIP_NONE);
 		SDL_DestroyTexture(mTexture);
 	}
