@@ -3,7 +3,7 @@
 C++ SDL2 Based Game Developement Framework for Beginners
 
 Example Usage:
-```
+```cpp
 #include "ezGame.h"
 using namespace ezGame;
 
